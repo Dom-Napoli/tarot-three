@@ -42,21 +42,19 @@ deckPageObj.push(cardObjects[i]);
     
     let cardImgDiv = document.createElement("div");
         cardImgDiv.setAttribute("class", "card-img-div");
-        console.log(cardImgDiv);
-
-    let cardBackImage = document.createElement("img");
-        cardBackImage.setAttribute("class", "card-back-img");
-        cardBackImage.setAttribute("src", decks[i].card_back);
-        console.log(cardBackImage);    
-
+        console.log(cardImgDiv); 
     }
-}    
+}
 // console.log(deckPageObj);
 
+let cardBackImg = [];
+for(let i = 0; i < decks.length; i++){
+    if(decks[i].card_back === 3){
+    cardBackImg.push(decks[i]);
 
-
-
-
-
-
-
+let cardBackImage = document.createElement("img");
+    cardBackImage.setAttribute("class", "card-back-img");
+    cardBackImage.setAttribute("src", decks[i].card_back);
+    console.log(cardBackImage);  
+    }
+}

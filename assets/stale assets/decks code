@@ -1,0 +1,23 @@
+//create an deck_id array
+//loop cardObjects array and iterate for deck_id
+//console.log results deck.html passed cards per specific deck_id
+let deckPageObj = cardObjects;
+for(let i = 0; i < cardObjects.length; i++){
+if(cardObjects[i].deck_id === deckId) {
+deckPageObj.push(cardObjects[i]);
+
+    // console.log(cardObjects[i]);
+    // console.log(cardObjects[i].image);
+    // console.log(cardObjects[i].wtmeaning);
+    // console.log(cardObjects[i].upright);
+    // console.log(cardObjects[i].reverse);
+    // console.log(cardObjects[i].copyright);
+    // console.log(cardObjects[i].horoscope);
+    // console.log(cardObjects[i].card_order);
+    // console.log(cardObjects[i].alt_name);
+
+    let cardcontainer = documentCreateElement("div");
+    console.log(cardcontainer);
+}
+}
+console.log(deckPageObj);

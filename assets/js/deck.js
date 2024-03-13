@@ -37,17 +37,27 @@ deckPageObj.push(cardObjects[i]);
 // console.log(cardObjects[i].card_order);
 // console.log(cardObjects[i].alt_name);
 
+    //create div for card container
     let cardContainer = document.createElement("div");
     cardContainer.setAttribute("class", "card-container");
     console.log(cardContainer);
 
+    //ceate div for card image
     let picDiv = document.createElement("div");
     picDiv.setAttribute("class", "pic-div");
     console.log(picDiv);
 
+    let cardBack;
+    for (let i = 0; i < decks.length; i++){
+    if(decks[i].deck_id === decks.card_back){
+        cardBack = decks[i];
+    }
+    console.log(cardBack)
+}
+    
     let imgBack = document.createElement("img");
     imgBack.setAttribute("class", "img-back");
-    imgBack.setAttribute("src", decks[i].card_back);
+    imgBack.setAttribute("src", decks[i]);
     console.log(imgBack);
 }
 }

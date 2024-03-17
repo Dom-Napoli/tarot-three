@@ -16,33 +16,62 @@ console.log(typeof deckId);
 // console.log(cards);
 // console.log(cardObjects);
 
-//VAR assigned to deck
-let selectedDeck
-//For loop to index through decks.js array and pass the deck type to the corresponding deck page.
+//VAR assigned to access objects in two-card-objects.js
+let selectedDeckObjects;
+//For loop to index through two-card-objects.js array an assign the objects for each individual card that corresponds with the deck page per the .deck_id.
+for (let i = 0; i < cardObjects.length; i++) {
+    // console.log(cardObjects[i]);
+    //CL results in all card objects accessed
+    if(cardObjects[i].deck_id === deckId) {
+        selectedDeckObjects = cardObjects[i];
+    }
+}
+//CL result confirmed
+console.log(selectedDeckObjects);
+
+//VAR assigned to access deck objects contained in decks.js
+let selectedDeck;
+//For loop to index through decks.js array and assign the objects for each deck that corresponds with the deck page per the .deck_id.
 for (let i = 0; i < decks.length; i++) {
-    console.log(decks[i]);
+    // console.log(decks[i]);
     //CL result confirms all three decks accessed
-    if (decks[i].id === deckId) {
+    if (decks[i].id === selectedDeckObjects.deck_id) {
         selectedDeck = decks[i];
     }
 }
-//CL result confirms deck type assigned to specific deck page. Tested by clicking on home page.
+//CL result confirmed
 console.log(selectedDeck);
 
-//VAR assigned to card 
-let selectedDeckCard
-//For loop to index through cards.js to access name and suit for each card.
+//VAR assigned to access card objects contained in cards.js
+let selectedDeckCard;
+//For loop to index through cards.js array assign the objects for each card that corresponds with the deck page per the .card_id.
 for (let i = 0; i < cards.length; i++) {
-    console.log(cards[i]);
+    // console.log(cards[i]);
     //CL results all 79 cards accessed.
-    if (cards[i].id === deckId) {
-        //If resulted in reference error as not defined when I used cardId.
-        //Changed to deckId - see console.log LINE: 45
+    if (cards[i].id === selectedDeckObjects.card_id) {
         selectedDeckCard = cards[i];
     }
 }
-//CL result as card id: 1
+//CL result as card
 console.log(selectedDeckCard);
+
+//VAR practice to access card back image
+let selectedDeckCardBack;
+for (let i = 0; i < decks.length; i++){
+    if(decks[i].id === selectedDeckObjects.deck_id){
+        selectedDeckCardBack = decks[i];
+    }
+}
+console.log(selectedDeckCardBack);
+
+//VAR assign all card objects that have the same .deck_id from two-card-objects.js array that matches selectedDeckObjects.deck_id. 
+let matchDecksCards = []
+for (let i = 0; i < cardObjects.length; i++) {
+    if ((cardObjects[i].deck_id === selectedDeck.id) &&(cardObjects[i].id !== selectedDeckObjects.id)){
+        matchDecksCards.push(cardObjects[i]);
+    }
+}
+console.log(matchDecksCards);
 
 //VAR - create deck page container
 let container = document.querySelector(".container");

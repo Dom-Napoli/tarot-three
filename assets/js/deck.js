@@ -1,12 +1,16 @@
-//code to conduct search
+//STEP:1
+//Below used start search. where to search, per deck id.  
+//Number of decks on home page will equal the number of subsequent individual deck pages that will be created. 
+
+//Conduct "search"
 const queryString = window.location.search;
 console.log(queryString);
 
-//code "where to search"
+//Search "where" 
 const urlParams = new URLSearchParams(queryString);
 console.log(urlParams);
 
-//parse for deck id
+//Parse "per deck id"
 const deckId = parseInt(urlParams.get("deck"));
 //console =  returns "number".
 console.log(typeof deckId);
@@ -15,6 +19,9 @@ console.log(typeof deckId);
 // console.log(decks);
 // console.log(cards);
 // console.log(cardObjects);
+
+//STEP:2
+//Create VARs to access objects in cardObjects.js/decks.js/cards.js by the deck id inorder to eventually pass them to the corresponding deck page.
 
 //VAR assigned to access objects in two-card-objects.js
 let selectedDeckObjects;
@@ -52,7 +59,7 @@ for (let i = 0; i < cards.length; i++) {
         selectedDeckCard = cards[i];
     }
 }
-//CL result as card
+//CL result as "number"
 console.log(selectedDeckCard);
 
 //VAR practice to access card back image
@@ -64,16 +71,37 @@ for (let i = 0; i < decks.length; i++){
 }
 console.log(selectedDeckCardBack);
 
-//VAR assign all card objects that have the same .deck_id from two-card-objects.js array that matches selectedDeckObjects.deck_id. 
+//STEP:3 Use VARs to Match objects in all three arrays to the corresponding deck page.
+//VAR Match all objects (identified by deck id) to create a new array and  "push" objects to the corresponding deck page.
 let matchDecksCards = []
 for (let i = 0; i < cardObjects.length; i++) {
     if ((cardObjects[i].deck_id === selectedDeck.id) &&(cardObjects[i].id !== selectedDeckObjects.id)){
         matchDecksCards.push(cardObjects[i]);
     }
 }
-console.log(matchDecksCards);
+//CL results in correct match of cards & decks to page.
+//"&&" = Operator with the description of "and"
+//"!==" = not equal value or not equal type"
+//"&&" & "!==" operators imply that each deck's id number is not identical but the parameters are the same.""
+console.log("cards & deck match page", matchDecksCards);
+console.log("selectedDeckObjects, selectedDeck, & selectedDeckCard", selectedDeckObjects, selectedDeck, selectedDeckCard);
 
-//VAR - create deck page container
+//STEP:4 Use VARs "document.querySelector" to "method" the first element that matches html and css files.
 let container = document.querySelector(".container");
+//CL result div.container
 console.log(container);
+
+let deckContainer = document.querySelector(".deck-container");
+//CL result div.deck-container
+console.log(deckContainer);
+
+//STEP:5 The remaining page elements were not coded in the deck.html. 
+//Use JavaScript to add elements "document.CreateElement" and use "setAttributes" to assign classname and source.
+//Created page mock up to determine type and number of elements to create
+
+//Stopped and resume after session.
+
+
+
+
 

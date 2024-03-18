@@ -1,16 +1,12 @@
-//STEP:1
-//Below used start search. where to search, per deck id.  
-//Number of decks on home page will equal the number of subsequent individual deck pages that will be created. 
-
-//Conduct "search"
+//Search current location on browser 
 const queryString = window.location.search;
 console.log(queryString);
 
-//Search "where" 
+//Create object from query string
 const urlParams = new URLSearchParams(queryString);
 console.log(urlParams);
 
-//Parse "per deck id"
+//Provides ability to fetch data
 const deckId = parseInt(urlParams.get("deck"));
 //console =  returns "number".
 console.log(typeof deckId);
@@ -20,73 +16,38 @@ console.log(typeof deckId);
 // console.log(cards);
 // console.log(cardObjects);
 
-//STEP:2
-//Create VARs to access objects in cardObjects.js/decks.js/cards.js by the deck id inorder to eventually pass them to the corresponding deck page.
-
-//VAR assigned to access objects in two-card-objects.js
-let selectedDeckObjects;
-//For loop to index through two-card-objects.js array an assign the objects for each individual card that corresponds with the deck page per the .deck_id.
+//VAR assigned a name to create a new array of objects contained in the data.js files (cards.js/ decks.js/ cardObjects.js). Cannot use current data.js file names or the contents will be overwritten and not accessible 
+let selectedDeckObjects = []
+//Loop through cardObjects and use additional VAR to loop through cards.js array to access the card name and suit and include them in the selectedDeckObjects array.
 for (let i = 0; i < cardObjects.length; i++) {
     // console.log(cardObjects[i]);
     //CL results in all card objects accessed
     if(cardObjects[i].deck_id === deckId) {
-        selectedDeckObjects = cardObjects[i];
+        let cardData = cards.find(x => x.id === cardObjects[i].card_id);
+        console.log(cardData);
+
+        cardObjects[i].card_name = cardData.name;
+        cardObjects[i].suit = cardData.suit;
+
+        selectedDeckObjects.push(cardObjects[i]);
     }
 }
 //CL result confirmed
 console.log(selectedDeckObjects);
 
 //VAR assigned to access deck objects contained in decks.js
-let selectedDeck;
+let selectedDeck; 
 //For loop to index through decks.js array and assign the objects for each deck that corresponds with the deck page per the .deck_id.
 for (let i = 0; i < decks.length; i++) {
     // console.log(decks[i]);
     //CL result confirms all three decks accessed
-    if (decks[i].id === selectedDeckObjects.deck_id) {
+    if (decks[i].id === deckId) {
         selectedDeck = decks[i];
     }
 }
 //CL result confirmed
 console.log(selectedDeck);
 
-//VAR assigned to access card objects contained in cards.js
-let selectedDeckCard;
-//For loop to index through cards.js array assign the objects for each card that corresponds with the deck page per the .card_id.
-for (let i = 0; i < cards.length; i++) {
-    // console.log(cards[i]);
-    //CL results all 79 cards accessed.
-    if (cards[i].id === selectedDeckObjects.card_id) {
-        selectedDeckCard = cards[i];
-    }
-}
-//CL result as "number"
-console.log(selectedDeckCard);
-
-//VAR practice to access card back image
-let selectedDeckCardBack;
-for (let i = 0; i < decks.length; i++){
-    if(decks[i].id === selectedDeckObjects.deck_id){
-        selectedDeckCardBack = decks[i];
-    }
-}
-console.log(selectedDeckCardBack);
-
-//STEP:3 Use VARs to Match objects in all three arrays to the corresponding deck page.
-//VAR Match all objects (identified by deck id) to create a new array and  "push" objects to the corresponding deck page.
-let matchDecksCards = []
-for (let i = 0; i < cardObjects.length; i++) {
-    if ((cardObjects[i].deck_id === selectedDeck.id) &&(cardObjects[i].id !== selectedDeckObjects.id)){
-        matchDecksCards.push(cardObjects[i]);
-    }
-}
-//CL results in correct match of cards & decks to page.
-//"&&" = Operator with the description of "and"
-//"!==" = not equal value or not equal type"
-//"&&" & "!==" operators imply that each deck's id number is not identical but the parameters are the same.""
-console.log("cards & deck match page", matchDecksCards);
-console.log("selectedDeckObjects, selectedDeck, & selectedDeckCard", selectedDeckObjects, selectedDeck, selectedDeckCard);
-
-//STEP:4 Use VARs "document.querySelector" to "method" the first element that matches html and css files.
 let container = document.querySelector(".container");
 //CL result div.container
 console.log(container);
